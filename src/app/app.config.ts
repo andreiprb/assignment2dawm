@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 
+import { LeftOutline, RightOutline } from '@ant-design/icons-angular/icons';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 registerLocaleData(zh);
@@ -19,7 +20,13 @@ export const appConfig: ApplicationConfig = {
     { provide: NZ_I18N, useValue: en_US },
     {
       provide: NZ_ICONS,
-      useValue: [CoffeeOutline, EditOutline, PlusOutline]
+      useValue: [
+        CoffeeOutline,
+        EditOutline,
+        PlusOutline,
+        LeftOutline,
+        RightOutline
+      ]
     }
   ]
 };
