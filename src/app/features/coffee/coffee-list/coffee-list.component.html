@@ -1,0 +1,71 @@
+<div class="coffee-list-container">
+  <div class="action-bar">
+    <h2>Coffee Collection</h2>
+    <button nz-button nzType="primary" (click)="addCoffee()">
+      <span nz-icon nzType="plus"></span>
+      Add Coffee
+    </button>
+  </div>
+
+  <nz-table
+    #coffeeTable
+    [nzData]="displayData"
+    [nzLoading]="loading"
+    [nzTotal]="totalItems"
+    [nzPageSize]="pageSize"
+    [nzShowPagination]="false"
+    nzBordered>
+    <thead>
+    <tr>
+      <th nzWidth="60px">ID</th>
+      <th>Name</th>
+      <th>Origin</th>
+      <th>Roast Level</th>
+      <th nzWidth="120px">Price</th>
+      <th>Temperature</th>
+      <th nzWidth="100px">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (coffee of coffeeTable.data; track coffee.id) {
+        <tr>
+          <td>{{ coffee.id }}</td>
+          <td>{{ coffee.name }}</td>
+          <td>{{ coffee.origin }}</td>
+          <td>{{ coffee.roastLevel }}</td>
+          <td>${{ coffee.price.toFixed(2) }}</td>
+          <td>{{ coffee.temperature | temperature:'celsius' }}</td>
+          <td>
+            <button
+              nz-button
+              nzType="primary"
+              nzSize="small"
+              nzShape="circle"
+              (click)="editCoffee(coffee)"
+              nzTooltip="Edit coffee">
+              <span nz-icon nzType="edit"></span>
+            </button>
+          </td>
+        </tr>
+      }
+
+      @if (coffeeTable.data.length === 0) {
+        <tr>
+          <td colspan="7" class="empty-table">
+            <span nz-icon nzType="coffee" nzTheme="outline"></span>
+            <p>No coffee data available</p>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+
+  <div class="pagination-container">
+    <nz-pagination
+      [nzPageIndex]="currentPage"
+      [nzTotal]="totalItems"
+      [nzPageSize]="pageSize"
+      (nzPageIndexChange)="onPageChange($event)">
+    </nz-pagination>
+  </div>
+</div>

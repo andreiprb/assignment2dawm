@@ -1,0 +1,11 @@
+.coffee-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 768px) {
+  .coffee-container {
+    margin: 10px auto;
+  }
+}

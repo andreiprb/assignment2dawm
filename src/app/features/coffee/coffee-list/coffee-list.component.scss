@@ -1,0 +1,81 @@
+// Variables
+$primary-color: #1890ff;
+$padding: 16px;
+$border-radius: 4px;
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+$table-header-bg: #fafafa;
+
+.coffee-list-container {
+  padding: $padding;
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+
+  .action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $padding;
+
+    h2 {
+      margin: 0;
+      color: rgba(0, 0, 0, 0.85);
+    }
+  }
+
+  .pagination-container {
+    margin-top: $padding;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .empty-table {
+    text-align: center;
+    padding: $padding * 3;
+
+    span[nz-icon] {
+      font-size: 48px;
+      color: #d9d9d9;
+    }
+
+    p {
+      margin-top: $padding;
+      color: rgba(0, 0, 0, 0.45);
+    }
+  }
+}
+
+// Override ng-zorro table styles
+::ng-deep {
+  .ant-table-thead > tr > th {
+    background-color: $table-header-bg;
+    font-weight: 600;
+  }
+
+  .ant-pagination-item-active {
+    border-color: $primary-color;
+
+    a {
+      color: $primary-color;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .coffee-list-container {
+    .action-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $padding;
+
+      button {
+        align-self: flex-end;
+      }
+    }
+
+    .pagination-container {
+      justify-content: center;
+    }
+  }
+}

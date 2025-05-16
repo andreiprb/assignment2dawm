@@ -1,0 +1,130 @@
+[
+  {
+    "id": 1,
+    "name": "Ethiopian Yirgacheffe",
+    "origin": "Ethiopia",
+    "roastLevel": "Light",
+    "price": 14.99,
+    "temperature": 92
+  },
+  {
+    "id": 2,
+    "name": "Colombian Supremo",
+    "origin": "Colombia",
+    "roastLevel": "Medium",
+    "price": 12.50,
+    "temperature": 90
+  },
+  {
+    "id": 3,
+    "name": "Sumatra Mandheling",
+    "origin": "Indonesia",
+    "roastLevel": "Dark",
+    "price": 15.75,
+    "temperature": 94
+  },
+  {
+    "id": 4,
+    "name": "Kenya AA",
+    "origin": "Kenya",
+    "roastLevel": "Medium-Light",
+    "price": 16.25,
+    "temperature": 91
+  },
+  {
+    "id": 5,
+    "name": "Guatemala Antigua",
+    "origin": "Guatemala",
+    "roastLevel": "Medium",
+    "price": 13.50,
+    "temperature": 90
+  },
+  {
+    "id": 6,
+    "name": "Costa Rica Tarrazu",
+    "origin": "Costa Rica",
+    "roastLevel": "Medium",
+    "price": 14.25,
+    "temperature": 89
+  },
+  {
+    "id": 7,
+    "name": "Brazil Santos",
+    "origin": "Brazil",
+    "roastLevel": "Medium-Dark",
+    "price": 11.75,
+    "temperature": 93
+  },
+  {
+    "id": 8,
+    "name": "Jamaica Blue Mountain",
+    "origin": "Jamaica",
+    "roastLevel": "Medium",
+    "price": 45.99,
+    "temperature": 88
+  },
+  {
+    "id": 9,
+    "name": "Hawaii Kona",
+    "origin": "United States",
+    "roastLevel": "Medium-Light",
+    "price": 36.50,
+    "temperature": 90
+  },
+  {
+    "id": 10,
+    "name": "Yemen Mocha",
+    "origin": "Yemen",
+    "roastLevel": "Medium-Dark",
+    "price": 18.99,
+    "temperature": 95
+  },
+  {
+    "id": 11,
+    "name": "Tanzania Peaberry",
+    "origin": "Tanzania",
+    "roastLevel": "Medium",
+    "price": 15.25,
+    "temperature": 92
+  },
+  {
+    "id": 12,
+    "name": "Papua New Guinea",
+    "origin": "Papua New Guinea",
+    "roastLevel": "Medium-Dark",
+    "price": 13.95,
+    "temperature": 93
+  },
+  {
+    "id": 13,
+    "name": "Honduras Marcala",
+    "origin": "Honduras",
+    "roastLevel": "Medium",
+    "price": 12.75,
+    "temperature": 89
+  },
+  {
+    "id": 14,
+    "name": "El Salvador Pacamara",
+    "origin": "El Salvador",
+    "roastLevel": "Medium-Light",
+    "price": 14.50,
+    "temperature": 90
+  },
+  {
+    "id": 15,
+    "name": "Peru Chanchamayo",
+    "origin": "Peru",
+    "roastLevel": "Light",
+    "price": 13.25,
+    "temperature": 87
+  },
+  {
+    "id": 16,
+    "name": "Mexico Chiapas",
+    "origin": "Mexico",
+    "roastLevel": "Medium",
+    "price": 12.95,
+    "temperature": 88
+  }
+]
