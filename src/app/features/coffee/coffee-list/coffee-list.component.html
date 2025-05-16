@@ -14,28 +14,31 @@
     [nzTotal]="totalItems"
     [nzPageSize]="pageSize"
     [nzShowPagination]="false"
-    nzBordered>
+    nzBordered
+    nzSize="default"
+    [nzTableLayout]="'fixed'"
+    [nzOuterBordered]="true">
     <thead>
-    <tr>
-      <th nzWidth="60px">ID</th>
-      <th>Name</th>
-      <th>Origin</th>
-      <th>Roast Level</th>
-      <th nzWidth="120px">Price</th>
-      <th>Temperature</th>
-      <th nzWidth="100px">Actions</th>
-    </tr>
+      <tr>
+        <th nzWidth="80px">ID</th>
+        <th nzWidth="180px">Name</th>
+        <th nzWidth="160px">Origin</th>
+        <th nzWidth="150px">Roast Level</th>
+        <th nzWidth="120px">Price</th>
+        <th nzWidth="150px">Temperature</th>
+        <th nzWidth="120px">Edit</th>
+      </tr>
     </thead>
     <tbody>
       @for (coffee of coffeeTable.data; track coffee.id) {
         <tr>
-          <td>{{ coffee.id }}</td>
-          <td>{{ coffee.name }}</td>
+          <td class="text-center">{{ coffee.id }}</td>
+          <td><span class="coffee-name">{{ coffee.name }}</span></td>
           <td>{{ coffee.origin }}</td>
           <td>{{ coffee.roastLevel }}</td>
-          <td>${{ coffee.price.toFixed(2) }}</td>
+          <td class="price-column">${{ coffee.price.toFixed(2) }}</td>
           <td>{{ coffee.temperature | temperature:'celsius' }}</td>
-          <td>
+          <td class="action-column">
             <button
               nz-button
               nzType="primary"

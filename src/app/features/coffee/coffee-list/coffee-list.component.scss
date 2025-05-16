@@ -3,58 +3,136 @@ $padding: 16px;
 $border-radius: 4px;
 $box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 $table-header-bg: #fafafa;
+$row-even-bg: #fafafa;
+$row-odd-bg: #ffffff;
+$row-hover-bg: #e6f7ff;
 
 .coffee-list-container {
-  padding: $padding;
-  background-color: white;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 
   .action-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $padding;
+    margin-bottom: 24px;
 
     h2 {
-      margin: 0;
+      margin-bottom: 0;
       color: rgba(0, 0, 0, 0.85);
+      font-size: 1.5rem;
     }
+  }
+
+  nz-table {
+    margin-bottom: 24px;
+
+    th {
+      font-weight: 600;
+      background-color: #f0f5ff;
+      padding: 16px !important;
+      font-size: 15px;
+      color: #1f1f1f;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid $primary-color !important;
+    }
+
+    td {
+      padding: 16px !important;
+      font-size: 14px;
+      line-height: 1.5;
+      height: 48px;
+      width: 110%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .coffee-name {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .price-column {
+      text-align: right;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 500;
+      color: #389e0d;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .action-column {
+      text-align: center;
+    }
+
+    .empty-table {
+      padding: 48px 0;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.45);
+
+      span[nz-icon] {
+        font-size: 32px;
+        margin-bottom: 16px;
+      }
+
+      p {
+        margin: 8px 0 0;
+      }
+    }
+
+    // Row hover effect
+    tr:hover td {
+      background-color: $row-hover-bg !important;
+    }
+  }
+
+  .row-even {
+    background-color: $row-even-bg;
+  }
+
+  .row-odd {
+    background-color: $row-odd-bg;
   }
 
   .pagination-container {
-    margin-top: $padding;
     display: flex;
     justify-content: flex-end;
-  }
-
-  .empty-table {
-    text-align: center;
-    padding: $padding * 3;
-
-    span[nz-icon] {
-      font-size: 48px;
-      color: #d9d9d9;
-    }
-
-    p {
-      margin-top: $padding;
-      color: rgba(0, 0, 0, 0.45);
-    }
+    margin-top: 24px;
   }
 }
 
 ::ng-deep {
   .ant-table-thead > tr > th {
-    background-color: $table-header-bg;
+    background-color: #f0f5ff;
     font-weight: 600;
+  }
+
+  .ant-table-tbody > tr > td {
+    transition: all 0.3s;
+  }
+
+  .ant-table {
+    border-radius: 8px;
+    overflow: hidden;
   }
 
   .ant-pagination-item-active {
     border-color: $primary-color;
+    background-color: $primary-color;
 
     a {
-      color: $primary-color;
+      color: white;
     }
   }
 
@@ -203,16 +281,16 @@ $table-header-bg: #fafafa;
       .ant-pagination-item-active {
         font-weight: 500;
         border-color: $primary-color;
-        background-color: #fff;
+        background-color: $primary-color;
 
         a {
-          color: $primary-color;
+          color: white;
         }
 
         &:hover {
           border-color: $primary-color;
           a {
-            color: $primary-color;
+            color: white;
           }
         }
       }
@@ -253,5 +331,31 @@ $table-header-bg: #fafafa;
         }
       }
     }
+  }
+}
+
+.action-bar button[nz-button] {
+  margin-left: 20px;
+  background-color: $primary-color;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: $border-radius;
+  padding: 8px 16px;
+  box-shadow: $box-shadow;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px lighten($primary-color, 40%);
+  }
+
+  span[nz-icon] {
+    margin-right: 8px;
   }
 }

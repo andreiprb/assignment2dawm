@@ -26,7 +26,7 @@ import { TemperaturePipe } from '../../../core/pipes/temperature.pipe';
     NzDividerModule,
     NzPaginationModule,
     NzMessageModule,
-    TemperaturePipe
+    TemperaturePipe,
   ]
 })
 export class CoffeeListComponent implements OnInit {
@@ -73,6 +73,11 @@ export class CoffeeListComponent implements OnInit {
   onPageChange(page: number): void {
     this.currentPage = page;
     this.updateDisplayData();
+  }
+
+  // Add function to set alternating row classes
+  onRowClassName(data: any, index: number): string {
+    return index % 2 === 0 ? 'row-even' : 'row-odd';
   }
 
   addCoffee(): void {
