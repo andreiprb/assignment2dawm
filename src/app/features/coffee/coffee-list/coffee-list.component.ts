@@ -2,103 +2,65 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
-import { NzPaginationModule } from 'ng-zorro-antd/pagination';
-import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { Coffee } from '../../../core/interfaces/coffee.interface';
-import { CoffeeFormComponent } from '../coffee-form/coffee-form.component';
 import { TemperaturePipe } from '../../../core/pipes/temperature.pipe';
+import { CoffeeFormComponent } from '../coffee-form/coffee-form.component';
 
 @Component({
   selector: 'app-coffee-list',
-  templateUrl: './coffee-list.component.html',
-  styleUrl: './coffee-list.component.scss',
   standalone: true,
   imports: [
     CommonModule,
     NzTableModule,
     NzButtonModule,
-    NzIconModule,
     NzModalModule,
     NzDividerModule,
-    NzPaginationModule,
-    NzMessageModule,
-    TemperaturePipe,
-  ]
+    NzIconModule,
+    TemperaturePipe
+  ],
+  templateUrl: './coffee-list.component.html',
+  styleUrls: ['./coffee-list.component.scss']
 })
 export class CoffeeListComponent implements OnInit {
-  coffeeData: Coffee[] = [];
-  pageSize = 8;
-  currentPage = 1;
-  totalItems = 0;
-  displayData: Coffee[] = [];
+  coffeeList: Coffee[] = [];
   loading = true;
 
-  constructor(
-    private modalService: NzModalService,
-    private messageService: NzMessageService
-  ) {}
+  constructor(private modalService: NzModalService) {}
 
   ngOnInit(): void {
-    this.loadCoffeeData();
-  }
-
-  loadCoffeeData(): void {
-    this.loading = true;
-    setTimeout(() => {
-      fetch('assets/coffee-data.json')
-        .then(response => response.json())
-        .then(data => {
-          this.coffeeData = data;
-          this.totalItems = this.coffeeData.length;
-          this.updateDisplayData();
-          this.loading = false;
-        })
-        .catch(error => {
-          console.error('Error loading coffee data:', error);
-          this.loading = false;
-        });
-    }, 500);
-  }
-
-  updateDisplayData(): void {
-    const start = (this.currentPage - 1) * this.pageSize;
-    const end = start + this.pageSize;
-    this.displayData = this.coffeeData.slice(start, end);
-  }
-
-  onPageChange(page: number): void {
-    this.currentPage = page;
-    this.updateDisplayData();
-  }
-
-  // Add function to set alternating row classes
-  onRowClassName(data: any, index: number): string {
-    return index % 2 === 0 ? 'row-even' : 'row-odd';
+    // In a real app, you'd fetch this from a service
+    fetch('assets/coffee-data.json')
+      .then(response => response.json())
+      .then(data => {
+        this.coffeeList = data;
+        this.loading = false;
+      })
+      .catch(error => {
+        console.error('Error loading coffee data:', error);
+        this.loading = false;
+      });
   }
 
   addCoffee(): void {
     const modal = this.modalService.create({
       nzTitle: 'Add New Coffee',
       nzContent: CoffeeFormComponent,
-      nzWidth: 720,
-      nzFooter: null
+      nzFooter: null,
+      nzWidth: 720
     });
 
     modal.afterClose.subscribe(result => {
       if (result) {
-        const newId = Math.max(0, ...this.coffeeData.map(c => c.id)) + 1;
-        const newCoffee: Coffee = { ...result, id: newId };
-
-        this.coffeeData = [...this.coffeeData, newCoffee];
-        this.totalItems = this.coffeeData.length;
-
-        this.updateDisplayData();
-
-        this.messageService.success('Coffee added successfully!');
+        // Add the new coffee to the list
+        const newCoffee: Coffee = {
+          ...result,
+          id: this.getNextId()
+        };
+        this.coffeeList = [...this.coffeeList, newCoffee];
       }
     });
   }
@@ -110,20 +72,34 @@ export class CoffeeListComponent implements OnInit {
       nzData: {
         coffee: { ...coffee }
       },
-      nzWidth: 720,
-      nzFooter: null
+      nzFooter: null,
+      nzWidth: 720
     });
 
     modal.afterClose.subscribe(result => {
       if (result) {
-        this.coffeeData = this.coffeeData.map(c =>
-          c.id === result.id ? result : c
+        // Update the coffee in the list
+        this.coffeeList = this.coffeeList.map(item =>
+          item.id === coffee.id ? { ...result, id: coffee.id } : item
         );
-
-        this.updateDisplayData();
-
-        this.messageService.success('Coffee updated successfully!');
       }
     });
+  }
+
+  deleteCoffee(coffee: Coffee): void {
+    this.modalService.confirm({
+      nzTitle: 'Are you sure you want to delete this coffee?',
+      nzContent: `${coffee.name} (${coffee.origin})`,
+      nzOkText: 'Yes',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.coffeeList = this.coffeeList.filter(item => item.id !== coffee.id);
+      },
+      nzCancelText: 'No'
+    });
+  }
+
+  private getNextId(): number {
+    return Math.max(...this.coffeeList.map(coffee => coffee.id), 0) + 1;
   }
 }
