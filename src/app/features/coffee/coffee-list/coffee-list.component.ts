@@ -32,7 +32,6 @@ export class CoffeeListComponent implements OnInit {
   constructor(private modalService: NzModalService) {}
 
   ngOnInit(): void {
-    // In a real app, you'd fetch this from a service
     fetch('assets/coffee-data.json')
       .then(response => response.json())
       .then(data => {
@@ -55,7 +54,6 @@ export class CoffeeListComponent implements OnInit {
 
     modal.afterClose.subscribe(result => {
       if (result) {
-        // Add the new coffee to the list
         const newCoffee: Coffee = {
           ...result,
           id: this.getNextId()
@@ -69,16 +67,18 @@ export class CoffeeListComponent implements OnInit {
     const modal = this.modalService.create({
       nzTitle: 'Edit Coffee',
       nzContent: CoffeeFormComponent,
-      nzData: {
-        coffee: { ...coffee }
-      },
       nzFooter: null,
       nzWidth: 720
     });
 
+    modal.componentInstance!.coffee = { ...coffee };
+
+    modal.afterOpen.subscribe(() => {
+      modal.componentInstance!.ngOnInit();
+    });
+
     modal.afterClose.subscribe(result => {
       if (result) {
-        // Update the coffee in the list
         this.coffeeList = this.coffeeList.map(item =>
           item.id === coffee.id ? { ...result, id: coffee.id } : item
         );

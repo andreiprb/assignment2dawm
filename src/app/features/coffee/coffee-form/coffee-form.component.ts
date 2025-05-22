@@ -11,7 +11,7 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 import { Coffee } from '../../../core/interfaces/coffee.interface';
-import { priceValidator } from '../../../shared/validators/custom-validators';
+import { priceValidator } from '../../../shared/validators/price-validator';
 
 @Component({
   selector: 'app-coffee-form',
@@ -42,7 +42,6 @@ export class CoffeeFormComponent implements OnInit {
     private modalRef: NzModalRef
   ) {}
 
-  // Price formatter and parser
   priceFormatter = (value: number): string => `$ ${value}`;
   priceParser = (value: string): number => parseFloat(value.replace('$ ', ''));
 
@@ -65,7 +64,6 @@ export class CoffeeFormComponent implements OnInit {
 
   submitForm(): void {
     if (this.coffeeForm.invalid) {
-      // Mark all fields as touched to trigger validation messages
       Object.values(this.coffeeForm.controls).forEach(control => {
         control.markAsDirty();
         control.updateValueAndValidity();
@@ -75,7 +73,6 @@ export class CoffeeFormComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    // Simulate API call
     setTimeout(() => {
       this.modalRef.close(this.coffeeForm.value);
       this.isSubmitting = false;
@@ -86,7 +83,6 @@ export class CoffeeFormComponent implements OnInit {
     this.modalRef.close();
   }
 
-  // Convenience getter for easy access to form fields
   get f() {
     return this.coffeeForm.controls;
   }
