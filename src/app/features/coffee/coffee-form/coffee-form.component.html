@@ -28,17 +28,20 @@
       <nz-input-number
         formControlName="price"
         id="price"
-        [nzMin]="5"
-        [nzMax]="100"
         [nzStep]="0.25"
         [nzFormatter]="priceFormatter"
         [nzParser]="priceParser"
         style="width: 100%"
       ></nz-input-number>
       <ng-template #priceErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('required')">Please enter a price</ng-container>
-        <ng-container *ngIf="control.hasError('min')">Price must be at least $5.00</ng-container>
-        <ng-container *ngIf="control.hasError('priceMax')">Price cannot exceed $100.00</ng-container>
+        <ng-container *ngIf="control.hasError('required')">Price is required</ng-container>
+        <ng-container *ngIf="control.hasError('priceMin')">
+          Minimum price is {{ control.getError('priceMin').min }}
+        </ng-container>
+        <ng-container *ngIf="control.hasError('priceMax')">
+          Maximum price is {{ control.getError('priceMax').max }}
+        </ng-container>
+
       </ng-template>
     </nz-form-control>
   </nz-form-item>

@@ -11,7 +11,7 @@ import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
 import { Coffee } from '../../../core/interfaces/coffee.interface';
-import { priceMaxValidator } from '../../../shared/validators/custom-validators';
+import { priceValidator } from '../../../shared/validators/custom-validators';
 
 @Component({
   selector: 'app-coffee-form',
@@ -57,7 +57,7 @@ export class CoffeeFormComponent implements OnInit {
       roastLevel: [this.coffee?.roastLevel || 'Medium', Validators.required],
       price: [
         this.coffee?.price || 15.00,
-        [Validators.required, Validators.min(5), priceMaxValidator(100)]
+        [Validators.required, priceValidator(5, 100)]
       ],
       temperature: [this.coffee?.temperature || 90, [Validators.required, Validators.min(80), Validators.max(100)]]
     });
