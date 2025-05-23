@@ -17,7 +17,9 @@
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="roastLevel">Roast Level</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please select a roast level">
       <nz-select formControlName="roastLevel" id="roastLevel" nzPlaceHolder="Select a roast level">
-        <nz-option *ngFor="let level of roastLevels" [nzValue]="level" [nzLabel]="level"></nz-option>
+        @for (level of roastLevels; track level) {
+          <nz-option [nzValue]="level" [nzLabel]="level"></nz-option>
+        }
       </nz-select>
     </nz-form-control>
   </nz-form-item>
@@ -34,13 +36,15 @@
         style="width: 100%"
       ></nz-input-number>
       <ng-template #priceErrorTpl let-control>
-        <ng-container *ngIf="control.hasError('required')">Price is required</ng-container>
-        <ng-container *ngIf="control.hasError('priceMin')">
-          Minimum price is {{ control.getError('priceMin').min }}
-        </ng-container>
-        <ng-container *ngIf="control.hasError('priceMax')">
-          Maximum price is {{ control.getError('priceMax').max }}
-        </ng-container>
+        @if (control.hasError('required')) {
+          <ng-container>Price is required</ng-container>
+        }
+        @if (control.hasError('priceMin')) {
+          <ng-container>Minimum price is {{ control.getError('priceMin').min }}</ng-container>
+        }
+        @if (control.hasError('priceMax')) {
+          <ng-container>Maximum price is {{ control.getError('priceMax').max }}</ng-container>
+        }
 
       </ng-template>
     </nz-form-control>

@@ -24,22 +24,24 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let coffee of coffeeTable.data">
-      <td>{{ coffee.name }}</td>
-      <td>{{ coffee.origin }}</td>
-      <td>{{ coffee.roastLevel }}</td>
-      <td>${{ coffee.price.toFixed(2) }}</td>
-      <td>{{ coffee.temperature | temperature:'both' }}</td>
-      <td>
-        <button nz-button nzType="primary" nzSize="small" (click)="editCoffee(coffee)">
-          <span nz-icon nzType="edit"></span>
-        </button>
-        <nz-divider nzType="vertical"></nz-divider>
-        <button nz-button nzType="primary" nzDanger nzSize="small" (click)="deleteCoffee(coffee)">
-          <span nz-icon nzType="delete"></span>
-        </button>
-      </td>
-    </tr>
+      @for (coffee of coffeeTable.data; track coffee) {
+        <tr>
+          <td>{{ coffee.name }}</td>
+          <td>{{ coffee.origin }}</td>
+          <td>{{ coffee.roastLevel }}</td>
+          <td>${{ coffee.price.toFixed(2) }}</td>
+          <td>{{ coffee.temperature | temperature:'both' }}</td>
+          <td>
+            <button nz-button nzType="primary" nzSize="small" (click)="editCoffee(coffee)">
+              <span nz-icon nzType="edit"></span>
+            </button>
+            <nz-divider nzType="vertical"></nz-divider>
+            <button nz-button nzType="primary" nzDanger nzSize="small" (click)="deleteCoffee(coffee)">
+              <span nz-icon nzType="delete"></span>
+            </button>
+          </td>
+        </tr>
+      }
     </tbody>
   </nz-table>
 </div>
